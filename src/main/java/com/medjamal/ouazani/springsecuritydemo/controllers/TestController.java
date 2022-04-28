@@ -1,13 +1,26 @@
 package com.medjamal.ouazani.springsecuritydemo.controllers;
 
+import com.medjamal.ouazani.springsecuritydemo.security.AppUser;
+import com.medjamal.ouazani.springsecuritydemo.security.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class TestController {
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/test")
     public String test(){
         return "Test is OK";
+    }
+
+    @GetMapping("/getAllUsers")
+    public List<AppUser> getAllUsers(){
+        return userService.getAll();
     }
 }
