@@ -1,5 +1,6 @@
 package com.medjamal.ouazani.springsecuritydemo.security;
 
+import com.medjamal.ouazani.springsecuritydemo.helpers.Constants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,10 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_ROUTES = {
-            "/api/auth/**",
-            "/test",
-            "/getAllUsers",
-            "/api/user/publicRoute"
+            "/api/auth/**"
     };
 
     @Bean
@@ -38,6 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .authorizeRequests()
                     .antMatchers(PUBLIC_ROUTES).permitAll()
+                    .antMatchers("/api/admin").hasAnyRole(Constants.ROLE_ADMIN)
+                    .antMatchers("/api/users").hasAnyRole(Constants.ROLE_USER, Constants.ROLE_ADMIN)
+                    .antMatchers("/api/dev").hasAnyRole(Constants.ROLE_DEVELOPER, Constants.ROLE_ADMIN)
                     .anyRequest().authenticated()
                     .and()
                 .addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class);

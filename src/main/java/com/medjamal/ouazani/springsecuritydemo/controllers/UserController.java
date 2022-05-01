@@ -1,7 +1,6 @@
 package com.medjamal.ouazani.springsecuritydemo.controllers;
 
 import com.medjamal.ouazani.springsecuritydemo.security.AppUser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +18,4 @@ public class UserController {
         return appUser;
     }
 
-    @GetMapping("/publicRoute")
-    public String publicRoute(){
-        return "Public Route";
-    }
 }

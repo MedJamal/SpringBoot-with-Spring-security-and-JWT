@@ -1,18 +1,18 @@
 package com.medjamal.ouazani.springsecuritydemo.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.medjamal.ouazani.springsecuritydemo.entities.Role;
+import com.medjamal.ouazani.springsecuritydemo.helpers.Constants;
 import com.sun.istack.NotNull;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Collection;
-import java.util.Date;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
+@Table(name = "users")
 public class AppUser implements UserDetails {
 
     @Id
@@ -28,6 +28,21 @@ public class AppUser implements UserDetails {
     @JsonIgnore
     private String password;
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
+
     private Date createdAt;
 
     public AppUser() {
@@ -37,6 +52,14 @@ public class AppUser implements UserDetails {
         this.name = name;
         this.username = username;
         this.password = password;
+        this.createdAt = new Date();
+    }
+
+    public AppUser(String name, String username, String password, Set<Role> roles) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
         this.createdAt = new Date();
     }
 
@@ -74,7 +97,12 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Set<Role> roles = this.roles;
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for(Role role: roles){
+            authorities.add(new SimpleGrantedAuthority(Constants.ROLE_PREFIX.concat(role.getName())));
+        }
+        return authorities;
     }
 
     @Override
