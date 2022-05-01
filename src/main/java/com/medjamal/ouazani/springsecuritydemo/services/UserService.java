@@ -1,5 +1,7 @@
-package com.medjamal.ouazani.springsecuritydemo.security;
+package com.medjamal.ouazani.springsecuritydemo.services;
 
+import com.medjamal.ouazani.springsecuritydemo.entities.AppUser;
+import com.medjamal.ouazani.springsecuritydemo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;

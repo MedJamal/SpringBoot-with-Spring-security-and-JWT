@@ -1,8 +1,11 @@
-package com.medjamal.ouazani.springsecuritydemo.security;
+package com.medjamal.ouazani.springsecuritydemo.controllers;
 
+import com.medjamal.ouazani.springsecuritydemo.entities.AppUser;
 import com.medjamal.ouazani.springsecuritydemo.entities.Role;
 import com.medjamal.ouazani.springsecuritydemo.helpers.Constants;
+import com.medjamal.ouazani.springsecuritydemo.security.*;
 import com.medjamal.ouazani.springsecuritydemo.services.RoleService;
+import com.medjamal.ouazani.springsecuritydemo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

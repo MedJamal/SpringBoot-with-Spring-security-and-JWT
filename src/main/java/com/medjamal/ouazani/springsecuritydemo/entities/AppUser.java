@@ -1,7 +1,6 @@
-package com.medjamal.ouazani.springsecuritydemo.security;
+package com.medjamal.ouazani.springsecuritydemo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.medjamal.ouazani.springsecuritydemo.entities.Role;
 import com.medjamal.ouazani.springsecuritydemo.helpers.Constants;
 import com.sun.istack.NotNull;
 import org.springframework.security.core.GrantedAuthority;

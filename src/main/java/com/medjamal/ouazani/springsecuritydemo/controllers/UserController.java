@@ -1,6 +1,6 @@
 package com.medjamal.ouazani.springsecuritydemo.controllers;
 
-import com.medjamal.ouazani.springsecuritydemo.security.AppUser;
+import com.medjamal.ouazani.springsecuritydemo.entities.AppUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,6 +1,7 @@
 package com.medjamal.ouazani.springsecuritydemo.security;
 
 import com.medjamal.ouazani.springsecuritydemo.helpers.Constants;
+import com.medjamal.ouazani.springsecuritydemo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
