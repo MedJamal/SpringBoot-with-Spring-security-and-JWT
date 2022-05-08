@@ -36,9 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .authorizeRequests()
                     .antMatchers(PUBLIC_ROUTES).permitAll()
-                    .antMatchers("/api/admin").hasAnyRole(Constants.ROLE_ADMIN)
-                    .antMatchers("/api/users").hasAnyRole(Constants.ROLE_USER, Constants.ROLE_ADMIN)
-                    .antMatchers("/api/dev").hasAnyRole(Constants.ROLE_DEVELOPER, Constants.ROLE_ADMIN)
+                    .antMatchers("/api/user/admin").hasAnyRole(Constants.ROLE_ADMIN)
+                    .antMatchers("/api/user/user").hasAnyRole(Constants.ROLE_USER, Constants.ROLE_ADMIN)
+                    .antMatchers("/api/user/getAll").hasAnyRole(Constants.ROLE_ADMIN)
+                    .antMatchers("/api/user/dev").hasAnyRole(Constants.ROLE_DEVELOPER, Constants.ROLE_ADMIN)
                     .anyRequest().authenticated()
                     .and()
                 .addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -1,6 +1,7 @@
 package com.medjamal.ouazani.springsecuritydemo.services;
 
-import com.medjamal.ouazani.springsecuritydemo.entities.AppUser;
+import com.medjamal.ouazani.springsecuritydemo.security.AppUser;
+import com.medjamal.ouazani.springsecuritydemo.entities.User;
 import com.medjamal.ouazani.springsecuritydemo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,15 +22,16 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        UserDetails userDetails = new AppUser(userRepository.findByUsername(username));
+        return userDetails;
     }
 
-    public AppUser save(AppUser appUser){
-        appUser.setPassword(passwordEncoder().encode(appUser.getPassword()));
-        return userRepository.save(appUser);
+    public User save(User user){
+        user.setPassword(passwordEncoder().encode(user.getPassword()));
+        return userRepository.save(user);
     }
 
-    public AppUser findUserByUserName(String username){
+    public User findUserByUserName(String username){
         return userRepository.findByUsername(username);
     }
 
@@ -38,7 +40,7 @@ public class UserService implements UserDetailsService {
         return new BCryptPasswordEncoder();
     }
 
-    public List<AppUser> getAll() {
+    public List<User> getAll() {
         return userRepository.findAll();
     }
 }

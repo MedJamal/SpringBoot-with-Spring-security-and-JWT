@@ -1,7 +1,7 @@
 package com.medjamal.ouazani.springsecuritydemo.controllers;
 
-import com.medjamal.ouazani.springsecuritydemo.entities.AppUser;
 import com.medjamal.ouazani.springsecuritydemo.entities.Role;
+import com.medjamal.ouazani.springsecuritydemo.entities.User;
 import com.medjamal.ouazani.springsecuritydemo.helpers.Constants;
 import com.medjamal.ouazani.springsecuritydemo.security.*;
 import com.medjamal.ouazani.springsecuritydemo.services.RoleService;
@@ -52,7 +52,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public AppUser signUp(@RequestBody SignUpRequest signUpRequest) throws Exception {
+    public User signUp(@RequestBody SignUpRequest signUpRequest) throws Exception {
         if(userService.findUserByUserName(signUpRequest.getUsername()) != null){
             throw new Exception("User already exist");
         }
@@ -62,7 +62,7 @@ public class AuthController {
         Set<Role> roles = new HashSet<>();
         roles.add(userRole);
 
-        AppUser newUser = new AppUser(
+        User newUser = new User(
                 signUpRequest.getName(),
                 signUpRequest.getUsername(),
                 signUpRequest.getPassword(),
